@@ -1,0 +1,13 @@
+customer_id,first_name,last_name,email,phone,loyalty_tier,loyalty_points,signup_date,birth_date,city,state,is_active,created_at,updated_at
+C001,James,Mitchell,james.mitchell@email.com,312-555-0101,gold,4500,2022-03-15,1985-06-12,Chicago,IL,true,2022-03-15 00:00:00,2024-09-01 12:00:00
+C002,Sarah,Johnson,sarah.j@email.com,312-555-0102,platinum,12000,2021-01-10,1990-11-03,Evanston,IL,true,2021-01-10 00:00:00,2024-10-15 12:00:00
+C003,Michael,Chen,m.chen@email.com,773-555-0103,silver,1800,2023-05-20,1978-02-28,Naperville,IL,true,2023-05-20 00:00:00,2024-08-20 12:00:00
+C004,Emily,Rodriguez,e.rodriguez@email.com,847-555-0104,gold,5200,2022-08-01,1995-09-15,Schaumburg,IL,true,2022-08-01 00:00:00,2024-11-01 12:00:00
+C005,David,Williams,d.williams@email.com,312-555-0105,bronze,600,2024-01-12,1988-04-22,Chicago,IL,true,2024-01-12 00:00:00,2024-07-10 12:00:00
+C006,Jessica,Brown,j.brown@email.com,630-555-0106,silver,2100,2023-02-28,1992-12-05,Oak Park,IL,true,2023-02-28 00:00:00,2024-09-15 12:00:00
+C007,Robert,Taylor,r.taylor@email.com,312-555-0107,platinum,15000,2020-06-15,1975-08-30,Chicago,IL,true,2020-06-15 00:00:00,2024-11-10 12:00:00
+C008,Amanda,Martinez,a.martinez@email.com,708-555-0108,bronze,350,2024-05-10,1999-01-18,Cicero,IL,true,2024-05-10 00:00:00,2024-06-20 12:00:00
+C009,Kevin,Lee,k.lee@email.com,312-555-0109,gold,4800,2022-11-05,1983-07-14,Chicago,IL,true,2022-11-05 00:00:00,2024-10-05 12:00:00
+C010,Lisa,Anderson,l.anderson@email.com,847-555-0110,silver,1500,2023-09-20,1991-03-25,Arlington Heights,IL,false,2023-09-20 00:00:00,2024-04-01 12:00:00
+C011,Thomas,Garcia,t.garcia@email.com,312-555-0111,bronze,200,2024-08-01,2000-05-09,Chicago,IL,true,2024-08-01 00:00:00,2024-08-15 12:00:00
+C012,Rachel,Davis,r.davis@email.com,773-555-0112,gold,3900,2022-04-18,1987-10-20,Chicago,IL,true,2022-04-18 00:00:00,2024-11-15 12:00:00

@@ -1,0 +1,9 @@
+venue_id,venue_name,venue_type,city,state,country,capacity,timezone,opened_date,is_active,created_at,updated_at
+V001,Soldier Field,stadium,Chicago,IL,US,61500,America/Chicago,2003-09-29,true,2023-01-01 00:00:00,2024-06-15 10:00:00
+V002,Wrigley Field,stadium,Chicago,IL,US,41649,America/Chicago,1914-04-23,true,2023-01-01 00:00:00,2024-06-15 10:00:00
+V003,United Center,arena,Chicago,IL,US,20917,America/Chicago,1994-08-18,true,2023-01-01 00:00:00,2024-06-15 10:00:00
+V004,Guaranteed Rate Field,stadium,Chicago,IL,US,40615,America/Chicago,1991-04-18,true,2023-01-01 00:00:00,2024-06-15 10:00:00
+V005,McCormick Place Convention Center,convention_center,Chicago,IL,US,10000,America/Chicago,1960-11-05,true,2023-01-01 00:00:00,2024-06-15 10:00:00
+V006,Allegiant Stadium,stadium,Las Vegas,NV,US,65000,America/Los_Angeles,2020-07-31,true,2023-03-01 00:00:00,2024-06-15 10:00:00
+V007,Churchill Downs,racetrack,Louisville,KY,US,60000,America/New_York,1875-05-17,true,2023-01-01 00:00:00,2024-06-15 10:00:00
+V008,Banc of California Stadium,stadium,Los Angeles,CA,US,22000,America/Los_Angeles,2018-04-18,true,2023-06-01 00:00:00,2024-06-15 10:00:00

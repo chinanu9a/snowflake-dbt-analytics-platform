@@ -1,0 +1,7 @@
+supplier_id,supplier_name,contact_name,contact_email,contact_phone,category,city,state,is_active,created_at,updated_at
+SUP001,Chicago Meat Co,Frank Rossi,frank@chicagomeat.com,312-555-2001,protein,Chicago,IL,true,2023-01-01 00:00:00,2024-06-01 10:00:00
+SUP002,Great Lakes Beverage,Tom Baker,tom@glbev.com,312-555-2002,beverages,Chicago,IL,true,2023-01-01 00:00:00,2024-06-01 10:00:00
+SUP003,Midwest Bakery Supply,Helen Wright,helen@mwbakery.com,847-555-2003,bakery,Elk Grove Village,IL,true,2023-01-01 00:00:00,2024-06-01 10:00:00
+SUP004,Farm Fresh Produce,Miguel Ortiz,miguel@farmfreshproduce.com,630-555-2004,produce,Aurora,IL,true,2023-01-01 00:00:00,2024-06-01 10:00:00
+SUP005,National Paper & Packaging,Diana Wells,diana@natpaper.com,708-555-2005,supplies,Cicero,IL,true,2023-01-01 00:00:00,2024-06-01 10:00:00
+SUP006,Craft Brew Distributors,Jake Miller,jake@craftbrewdist.com,312-555-2006,beverages,Chicago,IL,true,2023-01-01 00:00:00,2024-06-01 10:00:00

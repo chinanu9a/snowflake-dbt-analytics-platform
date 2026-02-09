@@ -1,0 +1,162 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Date dimension generated via dbt_date. Covers 2023-01-01 through 2025-12-31."
+    columns:
+      - name: date_day
+        description: "Calendar date (primary key)"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_venue
+    description: "Venue dimension with surrogate key. One row per venue."
+    columns:
+      - name: venue_key
+        description: "Surrogate key for the venue"
+        tests:
+          - unique
+          - not_null
+      - name: venue_id
+        description: "Natural key from source system"
+        tests:
+          - unique
+          - not_null
+      - name: venue_name
+        description: "Display name of the venue"
+      - name: venue_type
+        description: "Category of venue"
+      - name: capacity
+        description: "Maximum capacity"
+
+  - name: dim_event
+    description: "Event dimension enriched with venue name and attendance fill rate."
+    columns:
+      - name: event_key
+        description: "Surrogate key for the event"
+        tests:
+          - unique
+          - not_null
+      - name: event_id
+        description: "Natural key from source system"
+        tests:
+          - unique
+          - not_null
+      - name: attendance_fill_rate
+        description: "Actual attendance as a percentage of venue capacity"
+
+  - name: dim_menu_item
+    description: "Menu item dimension with cost and margin data."
+    columns:
+      - name: menu_item_key
+        description: "Surrogate key for the menu item"
+        tests:
+          - unique
+          - not_null
+      - name: menu_item_id
+        description: "Natural key from source system"
+        tests:
+          - unique
+          - not_null
+      - name: margin_pct
+        description: "Profit margin percentage ((price - cost) / price × 100)"
+
+  - name: dim_customer
+    description: >
+      Customer dimension enriched with lifetime order metrics and frequency segmentation.
+    columns:
+      - name: customer_key
+        description: "Surrogate key for the customer"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Natural key from source system"
+        tests:
+          - unique
+          - not_null
+      - name: loyalty_tier
+        description: "Current loyalty tier"
+      - name: customer_frequency_segment
+        description: "Behavioral segment: no_orders, one_time, returning, or repeat"
+
+  - name: dim_employee
+    description: "Employee dimension with venue assignment."
+    columns:
+      - name: employee_key
+        description: "Surrogate key for the employee"
+        tests:
+          - unique
+          - not_null
+      - name: employee_id
+        description: "Natural key from source system"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_supplier
+    description: "Supplier dimension for inventory sourcing analysis."
+    columns:
+      - name: supplier_key
+        description: "Surrogate key for the supplier"
+        tests:
+          - unique
+          - not_null
+      - name: supplier_id
+        description: "Natural key from source system"
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_sales_line_items
+    description: >
+      Fact table at line-item grain. Each row is one menu item within an order.
+      Contains all monetary measures: gross_sales, net_sales, discounts, taxes, cost, margin.
+      Incrementally loaded based on updated_at.
+    columns:
+      - name: order_item_id
+        description: "Primary key — unique line item identifier"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Foreign key to fct_orders"
+        tests:
+          - not_null
+      - name: venue_id
+        description: "Foreign key to dim_venue"
+        tests:
+          - not_null
+      - name: gross_sales
+        description: "unit_price × quantity (before discounts)"
+      - name: net_sales
+        description: "gross_sales minus line_discount"
+      - name: gross_margin
+        description: "net_sales minus total_cost"
+      - name: order_date
+        description: "Date the order was placed"
+
+  - name: fct_orders
+    description: >
+      Fact table at order grain. One row per POS transaction.
+      Aggregated from line items with order-level totals for sales, costs, and item counts.
+      Incrementally loaded based on updated_at.
+    columns:
+      - name: order_id
+        description: "Primary key — unique order identifier"
+        tests:
+          - unique
+          - not_null
+      - name: venue_id
+        description: "Foreign key to dim_venue"
+        tests:
+          - not_null
+      - name: gross_sales
+        description: "Total gross sales across all line items"
+      - name: net_sales
+        description: "Total net sales after discounts"
+      - name: order_total
+        description: "Total including tax"
+      - name: tip_amount
+        description: "Tip amount from the original order"

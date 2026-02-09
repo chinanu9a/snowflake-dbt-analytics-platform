@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: int_order_items_enriched
+    description: >
+      Enriched order line items joined with order header and menu item details.
+      Calculates gross_sales, net_sales, total_cost, and gross_margin per line item.
+    columns:
+      - name: order_item_id
+        description: "Primary key — unique line item identifier"
+        tests:
+          - unique
+          - not_null
+      - name: gross_sales
+        description: "unit_price × quantity before discounts"
+      - name: net_sales
+        description: "gross_sales minus line_discount"
+      - name: gross_margin
+        description: "net_sales minus total_cost"
+
+  - name: int_orders_aggregated
+    description: >
+      Order-level aggregation of line items. Provides totals for sales, discounts,
+      taxes, costs, and item counts per order.
+    columns:
+      - name: order_id
+        description: "Primary key — unique order identifier"
+        tests:
+          - unique
+          - not_null
+
+  - name: int_customer_orders
+    description: >
+      Customer-level aggregation of order history. Calculates lifetime value,
+      frequency segments, and behavioral metrics.
+    columns:
+      - name: customer_id
+        description: "Primary key — unique customer identifier"
+        tests:
+          - unique
+          - not_null
+      - name: customer_frequency_segment
+        description: "Segment based on order count: one_time, returning, or repeat"
+        tests:
+          - accepted_values:
+              values: ['one_time', 'returning', 'repeat']
+
+  - name: int_event_venue_bridge
+    description: >
+      Bridge table mapping events to venues with attendance metrics.
+      Useful for analyzing event performance at specific locations.
+    columns:
+      - name: event_venue_key
+        description: "Surrogate key (event_id + venue_id)"
+        tests:
+          - unique
+          - not_null
+      - name: attendance_pct
+        description: "Actual attendance as a percentage of venue capacity"

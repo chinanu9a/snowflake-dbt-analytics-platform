@@ -1,0 +1,187 @@
+version: 2
+
+models:
+  - name: stg_venues
+    description: "Cleaned venue data. Standardized naming, typed columns, trimmed strings."
+    columns:
+      - name: venue_id
+        description: "Primary key — unique venue identifier"
+        tests:
+          - unique
+          - not_null
+      - name: venue_name
+        description: "Lowercased, trimmed venue display name"
+      - name: venue_type
+        description: "Type of venue (stadium, arena, convention_center, racetrack)"
+        tests:
+          - accepted_values:
+              values: ['stadium', 'arena', 'convention_center', 'racetrack']
+      - name: capacity
+        description: "Maximum seating/standing capacity"
+      - name: is_active
+        description: "Whether the venue is currently operational"
+
+  - name: stg_events
+    description: "Cleaned event data with typed dates and attendance figures."
+    columns:
+      - name: event_id
+        description: "Primary key — unique event identifier"
+        tests:
+          - unique
+          - not_null
+      - name: venue_id
+        description: "Foreign key to stg_venues"
+        tests:
+          - relationships:
+              to: ref('stg_venues')
+              field: venue_id
+      - name: event_type
+        description: "Category of event"
+        tests:
+          - accepted_values:
+              values: ['football', 'baseball', 'basketball', 'hockey', 'horse_racing', 'convention', 'concert']
+      - name: event_date
+        description: "Calendar date of the event"
+        tests:
+          - not_null
+
+  - name: stg_customers
+    description: "Cleaned customer data with standardized loyalty tiers and contact info."
+    columns:
+      - name: customer_id
+        description: "Primary key — unique customer identifier"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "Lowercased email address"
+      - name: loyalty_tier
+        description: "Current loyalty tier level"
+        tests:
+          - accepted_values:
+              values: ['bronze', 'silver', 'gold', 'platinum']
+
+  - name: stg_menu_items
+    description: "Cleaned menu item catalog with pricing and cost data."
+    columns:
+      - name: menu_item_id
+        description: "Primary key — unique menu item identifier"
+        tests:
+          - unique
+          - not_null
+      - name: venue_id
+        description: "Foreign key to stg_venues — venue where item is served"
+        tests:
+          - relationships:
+              to: ref('stg_venues')
+              field: venue_id
+      - name: unit_price
+        description: "Current customer-facing selling price"
+      - name: cost_price
+        description: "Cost of goods for margin calculations"
+      - name: category
+        description: "High-level category (food, beverage)"
+
+  - name: stg_employees
+    description: "Cleaned employee data for concessions staff."
+    columns:
+      - name: employee_id
+        description: "Primary key — unique employee identifier"
+        tests:
+          - unique
+          - not_null
+      - name: venue_id
+        description: "Foreign key to stg_venues — home venue assignment"
+        tests:
+          - relationships:
+              to: ref('stg_venues')
+              field: venue_id
+      - name: role
+        description: "Job role (cashier, shift_lead)"
+        tests:
+          - accepted_values:
+              values: ['cashier', 'shift_lead']
+
+  - name: stg_suppliers
+    description: "Cleaned supplier master data."
+    columns:
+      - name: supplier_id
+        description: "Primary key — unique supplier identifier"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_inventory
+    description: "Cleaned inventory data with stock levels and reorder thresholds."
+    columns:
+      - name: inventory_id
+        description: "Primary key — unique inventory record"
+        tests:
+          - unique
+          - not_null
+      - name: venue_id
+        description: "Foreign key to stg_venues"
+        tests:
+          - relationships:
+              to: ref('stg_venues')
+              field: venue_id
+      - name: supplier_id
+        description: "Foreign key to stg_suppliers"
+        tests:
+          - relationships:
+              to: ref('stg_suppliers')
+              field: supplier_id
+
+  - name: stg_orders
+    description: "Cleaned POS order headers with typed monetary amounts and timestamps."
+    columns:
+      - name: order_id
+        description: "Primary key — unique order identifier"
+        tests:
+          - unique
+          - not_null
+      - name: event_id
+        description: "Foreign key to stg_events"
+        tests:
+          - relationships:
+              to: ref('stg_events')
+              field: event_id
+      - name: venue_id
+        description: "Foreign key to stg_venues"
+        tests:
+          - relationships:
+              to: ref('stg_venues')
+              field: venue_id
+      - name: order_status
+        description: "Current order status"
+        tests:
+          - accepted_values:
+              values: ['completed', 'refunded', 'voided', 'pending']
+      - name: payment_method
+        description: "Payment type used"
+        tests:
+          - accepted_values:
+              values: ['credit_card', 'cash', 'mobile_pay']
+
+  - name: stg_order_items
+    description: "Cleaned POS line items with calculated monetary fields."
+    columns:
+      - name: order_item_id
+        description: "Primary key — unique line item identifier"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Foreign key to stg_orders"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: menu_item_id
+        description: "Foreign key to stg_menu_items"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_menu_items')
+              field: menu_item_id

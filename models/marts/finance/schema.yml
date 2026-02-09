@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: fct_daily_venue_sales
+    description: >
+      Daily sales summary per venue. Aggregates line-item sales into daily metrics
+      including revenue, cost, margin, and category breakdowns.
+    columns:
+      - name: daily_venue_sales_key
+        description: "Surrogate key (venue_id + order_date)"
+        tests:
+          - unique
+          - not_null
+      - name: venue_id
+        description: "Foreign key to dim_venue"
+        tests:
+          - not_null
+      - name: order_date
+        description: "Calendar date"
+        tests:
+          - not_null
+      - name: gross_sales
+        description: "Total gross sales for the venue on this date"
+      - name: net_sales
+        description: "Total net sales after discounts"
+      - name: gross_margin
+        description: "Total margin (net_sales - total_cost)"

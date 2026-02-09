@@ -1,0 +1,11 @@
+employee_id,first_name,last_name,role,venue_id,hire_date,hourly_rate,is_active,created_at,updated_at
+EMP001,Carlos,Ramirez,cashier,V001,2022-06-01,18.50,true,2022-06-01 00:00:00,2024-01-15 10:00:00
+EMP002,Maria,Santos,cashier,V001,2023-03-15,17.00,true,2023-03-15 00:00:00,2024-01-15 10:00:00
+EMP003,John,O_Brien,shift_lead,V001,2021-04-10,24.00,true,2021-04-10 00:00:00,2024-01-15 10:00:00
+EMP004,Aisha,Patel,cashier,V002,2023-01-20,17.50,true,2023-01-20 00:00:00,2024-01-15 10:00:00
+EMP005,Derek,Washington,shift_lead,V002,2020-09-01,25.00,true,2020-09-01 00:00:00,2024-01-15 10:00:00
+EMP006,Linda,Nguyen,cashier,V003,2022-11-10,18.00,true,2022-11-10 00:00:00,2024-01-15 10:00:00
+EMP007,Marcus,Johnson,cashier,V003,2023-08-01,17.00,true,2023-08-01 00:00:00,2024-01-15 10:00:00
+EMP008,Samantha,Clark,shift_lead,V004,2021-07-15,23.50,true,2021-07-15 00:00:00,2024-01-15 10:00:00
+EMP009,Tyler,Foster,cashier,V006,2023-05-01,19.00,true,2023-05-01 00:00:00,2024-01-15 10:00:00
+EMP010,Grace,Kim,cashier,V007,2022-03-01,17.50,true,2022-03-01 00:00:00,2024-01-15 10:00:00

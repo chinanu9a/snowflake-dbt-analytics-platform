@@ -1,0 +1,34 @@
+# =============================================================================
+# dbt Profiles — Stadium Concessions Analytics
+# =============================================================================
+# Copy this file to ~/.dbt/profiles.yml   OR
+# set DBT_PROFILES_DIR to the project root directory.
+# =============================================================================
+
+stadium_concessions:
+
+  # ── Default: DuckDB (runs locally, no credentials needed) ──────────────
+  target: dev_duckdb
+
+  outputs:
+
+    dev_duckdb:
+      type: duckdb
+      path: "target/stadium_concessions.duckdb"
+      threads: 4
+
+    # ── Optional: Snowflake ──────────────────────────────────────────────
+    # Uncomment and fill in credentials to use Snowflake.
+    # You can also use environment variables: {{ env_var('SNOWFLAKE_ACCOUNT') }}
+
+    # dev_snowflake:
+    #   type: snowflake
+    #   account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+    #   user: "{{ env_var('SNOWFLAKE_USER') }}"
+    #   password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+    #   role: "{{ env_var('SNOWFLAKE_ROLE', 'TRANSFORMER') }}"
+    #   database: "{{ env_var('SNOWFLAKE_DATABASE', 'ANALYTICS') }}"
+    #   warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'TRANSFORMING') }}"
+    #   schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'DBT_DEV') }}"
+    #   threads: 4
+    #   client_session_keep_alive: true

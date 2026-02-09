@@ -1,0 +1,52 @@
+version: 2
+
+exposures:
+  - name: sales_ops_dashboard
+    label: "Levy Sales Ops Dashboard"
+    type: dashboard
+    maturity: high
+    description: >
+      Primary operational dashboard used by venue managers and the central analytics team
+      to monitor real-time and historical concessions sales performance across all venues.
+      Covers revenue, item mix, discount impact, and event-level KPIs.
+    depends_on:
+      - ref('fct_orders')
+      - ref('fct_sales_line_items')
+      - ref('fct_daily_venue_sales')
+      - ref('dim_venue')
+      - ref('dim_event')
+      - ref('dim_menu_item')
+      - ref('dim_date')
+    owner:
+      name: "Analytics Engineering"
+      email: "analytics@company.com"
+
+  - name: loyalty_analytics_report
+    label: "Customer Loyalty Analytics"
+    type: analysis
+    maturity: medium
+    description: >
+      Weekly report analyzing customer loyalty program performance including
+      repeat rates, tier migration, lifetime value, and redemption patterns.
+    depends_on:
+      - ref('dim_customer')
+      - ref('fct_orders')
+      - ref('fct_sales_line_items')
+    owner:
+      name: "Analytics Engineering"
+      email: "analytics@company.com"
+
+  - name: inventory_management_report
+    label: "Inventory & Supplier Report"
+    type: analysis
+    maturity: low
+    description: >
+      Operational report for supply chain team tracking inventory levels,
+      reorder alerts, and supplier performance.
+    depends_on:
+      - ref('stg_inventory')
+      - ref('dim_supplier')
+      - ref('dim_venue')
+    owner:
+      name: "Supply Chain Ops"
+      email: "supply-chain@company.com"

@@ -1,0 +1,204 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw data from POS systems, venue management, and supplier systems. Loaded via dbt seeds."
+    schema: raw
+    loader: "dbt seed"
+
+    freshness:
+      warn_after: { count: 24, period: hour }
+      error_after: { count: 72, period: hour }
+    loaded_at_field: updated_at
+
+    tables:
+      - name: raw_venues
+        description: "Venue master data — stadiums, arenas, convention centers managed by the hospitality company."
+        columns:
+          - name: venue_id
+            description: "Primary key for the venue"
+            tests:
+              - unique
+              - not_null
+          - name: venue_name
+            description: "Display name of the venue"
+          - name: venue_type
+            description: "Type of venue (stadium, arena, convention_center, racetrack)"
+            tests:
+              - accepted_values:
+                  values: ['stadium', 'arena', 'convention_center', 'racetrack']
+          - name: city
+            description: "City where the venue is located"
+          - name: state
+            description: "US state abbreviation"
+          - name: country
+            description: "Country code (e.g., US)"
+          - name: capacity
+            description: "Maximum seating/standing capacity"
+          - name: timezone
+            description: "IANA timezone string"
+          - name: opened_date
+            description: "Date venue originally opened"
+          - name: is_active
+            description: "Whether the venue is currently active"
+
+      - name: raw_events
+        description: "Events scheduled at venues — games, concerts, conventions."
+        columns:
+          - name: event_id
+            description: "Primary key for the event"
+            tests:
+              - unique
+              - not_null
+          - name: venue_id
+            description: "Foreign key to the venue"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_venues')
+                  field: venue_id
+          - name: event_name
+            description: "Display name of the event"
+          - name: event_type
+            description: "Category of event"
+            tests:
+              - accepted_values:
+                  values: ['football', 'baseball', 'basketball', 'hockey', 'horse_racing', 'convention', 'concert']
+          - name: event_date
+            description: "Calendar date of the event"
+          - name: expected_attendance
+            description: "Projected attendance"
+          - name: actual_attendance
+            description: "Verified post-event attendance"
+          - name: is_cancelled
+            description: "Whether the event was cancelled"
+
+      - name: raw_customers
+        description: "Customer and loyalty program master data."
+        columns:
+          - name: customer_id
+            description: "Primary key for the customer"
+            tests:
+              - unique
+              - not_null
+          - name: loyalty_tier
+            description: "Current loyalty tier"
+            tests:
+              - accepted_values:
+                  values: ['bronze', 'silver', 'gold', 'platinum']
+          - name: is_active
+            description: "Whether the customer account is active"
+
+      - name: raw_menu_items
+        description: "Menu item catalog with pricing per venue."
+        columns:
+          - name: menu_item_id
+            description: "Primary key for the menu item"
+            tests:
+              - unique
+              - not_null
+          - name: venue_id
+            description: "Foreign key to venue where item is served"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_venues')
+                  field: venue_id
+          - name: unit_price
+            description: "Current selling price"
+          - name: cost_price
+            description: "Cost of goods for this item"
+          - name: is_alcoholic
+            description: "Whether the item contains alcohol"
+          - name: is_available
+            description: "Whether the item is currently on the menu"
+
+      - name: raw_employees
+        description: "Concessions staff master data."
+        columns:
+          - name: employee_id
+            description: "Primary key for the employee"
+            tests:
+              - unique
+              - not_null
+          - name: venue_id
+            description: "Home venue assignment"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_venues')
+                  field: venue_id
+
+      - name: raw_suppliers
+        description: "Supplier master data for inventory sourcing."
+        columns:
+          - name: supplier_id
+            description: "Primary key for the supplier"
+            tests:
+              - unique
+              - not_null
+
+      - name: raw_inventory
+        description: "Current inventory levels per venue."
+        columns:
+          - name: inventory_id
+            description: "Primary key for the inventory record"
+            tests:
+              - unique
+              - not_null
+          - name: venue_id
+            description: "Foreign key to venue"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_venues')
+                  field: venue_id
+          - name: supplier_id
+            description: "Foreign key to supplier"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_suppliers')
+                  field: supplier_id
+
+      - name: raw_orders
+        description: "POS order headers — one row per transaction."
+        columns:
+          - name: order_id
+            description: "Primary key for the order"
+            tests:
+              - unique
+              - not_null
+          - name: event_id
+            description: "Foreign key to the event during which the order was placed"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_events')
+                  field: event_id
+          - name: venue_id
+            description: "Foreign key to venue"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_venues')
+                  field: venue_id
+          - name: order_status
+            description: "Current status of the order"
+            tests:
+              - accepted_values:
+                  values: ['completed', 'refunded', 'voided', 'pending']
+
+      - name: raw_order_items
+        description: "POS order line items — one row per item in an order."
+        columns:
+          - name: order_item_id
+            description: "Primary key for the line item"
+            tests:
+              - unique
+              - not_null
+          - name: order_id
+            description: "Foreign key to order header"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_orders')
+                  field: order_id
+          - name: menu_item_id
+            description: "Foreign key to menu item"
+            tests:
+              - relationships:
+                  to: source('raw', 'raw_menu_items')
+                  field: menu_item_id

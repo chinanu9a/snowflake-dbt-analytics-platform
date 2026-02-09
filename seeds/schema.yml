@@ -1,0 +1,94 @@
+version: 2
+
+seeds:
+  - name: raw_venues
+    description: "Raw venue data representing stadiums, arenas, and convention centers"
+    config:
+      column_types:
+        venue_id: varchar
+        capacity: integer
+        is_active: boolean
+
+  - name: raw_events
+    description: "Raw event data for games, concerts, and other events at venues"
+    config:
+      column_types:
+        event_id: varchar
+        venue_id: varchar
+        expected_attendance: integer
+        actual_attendance: integer
+        is_cancelled: boolean
+
+  - name: raw_customers
+    description: "Raw customer and loyalty program data"
+    config:
+      column_types:
+        customer_id: varchar
+        loyalty_points: integer
+        is_active: boolean
+
+  - name: raw_menu_items
+    description: "Raw menu item catalog with pricing"
+    config:
+      column_types:
+        menu_item_id: varchar
+        venue_id: varchar
+        unit_price: decimal(10,2)
+        cost_price: decimal(10,2)
+        is_alcoholic: boolean
+        is_available: boolean
+
+  - name: raw_employees
+    description: "Raw employee data for concessions staff"
+    config:
+      column_types:
+        employee_id: varchar
+        venue_id: varchar
+        hourly_rate: decimal(10,2)
+        is_active: boolean
+
+  - name: raw_suppliers
+    description: "Raw supplier data for inventory sourcing"
+    config:
+      column_types:
+        supplier_id: varchar
+        is_active: boolean
+
+  - name: raw_inventory
+    description: "Raw inventory tracking data per venue"
+    config:
+      column_types:
+        inventory_id: varchar
+        venue_id: varchar
+        supplier_id: varchar
+        quantity_on_hand: integer
+        reorder_point: integer
+        unit_cost: decimal(10,2)
+
+  - name: raw_orders
+    description: "Raw POS order header data"
+    config:
+      column_types:
+        order_id: varchar
+        event_id: varchar
+        customer_id: varchar
+        employee_id: varchar
+        venue_id: varchar
+        subtotal: decimal(10,2)
+        tax_amount: decimal(10,2)
+        discount_amount: decimal(10,2)
+        tip_amount: decimal(10,2)
+        total_amount: decimal(10,2)
+
+  - name: raw_order_items
+    description: "Raw POS order line item data"
+    config:
+      column_types:
+        order_item_id: varchar
+        order_id: varchar
+        menu_item_id: varchar
+        quantity: integer
+        unit_price: decimal(10,2)
+        line_discount: decimal(10,2)
+        line_tax: decimal(10,2)
+        line_total: decimal(10,2)

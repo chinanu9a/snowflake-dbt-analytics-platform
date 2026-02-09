@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: metric_sales_summary
+    description: >
+      Pre-aggregated sales metrics view for BI consumption.
+      Joins daily venue sales with venue dimension and adds fiscal calendar fields.
+    columns:
+      - name: venue_id
+        description: "Venue identifier"
+        tests:
+          - not_null
+      - name: order_date
+        description: "Calendar date of sales"
+        tests:
+          - not_null
+      - name: fiscal_quarter
+        description: "Fiscal quarter (Oct-based FY: Q1=Oct-Dec, Q2=Jan-Mar, Q3=Apr-Jun, Q4=Jul-Sep)"
+      - name: margin_pct
+        description: "Gross margin as a percentage of gross sales"
+      - name: avg_order_value
+        description: "Average net sales per order"

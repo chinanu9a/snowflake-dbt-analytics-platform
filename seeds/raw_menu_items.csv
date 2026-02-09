@@ -1,0 +1,25 @@
+menu_item_id,item_name,category,subcategory,unit_price,cost_price,is_alcoholic,is_available,venue_id,created_at,updated_at
+MI001,Classic Hot Dog,food,hot_dogs,7.50,2.25,false,true,V001,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI002,Chicago Deep Dish Slice,food,pizza,12.00,3.80,false,true,V001,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI003,Loaded Nachos,food,snacks,14.00,4.20,false,true,V001,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI004,Draft Beer 16oz,beverage,beer,12.00,2.50,true,true,V001,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI005,Craft IPA 16oz,beverage,beer,15.00,3.50,true,true,V001,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI006,Soft Drink 20oz,beverage,non_alcoholic,6.50,0.80,false,true,V001,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI007,Premium Burger,food,burgers,16.00,5.20,false,true,V002,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI008,Chicken Tenders Basket,food,chicken,13.50,4.00,false,true,V002,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI009,Wrigley Field Dog,food,hot_dogs,8.00,2.40,false,true,V002,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI010,Margarita Frozen,beverage,cocktails,16.00,3.80,true,true,V002,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI011,Bottled Water,beverage,non_alcoholic,5.50,0.30,false,true,V002,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI012,Italian Beef Sandwich,food,sandwiches,15.00,4.80,false,true,V003,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI013,Pretzel with Cheese,food,snacks,10.00,2.50,false,true,V003,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI014,Domestic Beer 24oz,beverage,beer,14.00,2.80,true,true,V003,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI015,House Wine,beverage,wine,13.00,3.00,true,true,V003,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI016,Veggie Wrap,food,wraps,11.00,3.50,false,true,V004,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI017,BBQ Pulled Pork,food,sandwiches,14.50,4.50,false,true,V004,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI018,Lemonade Fresh,beverage,non_alcoholic,7.00,1.20,false,true,V004,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI019,Bourbon Mint Julep,beverage,cocktails,18.00,4.50,true,true,V007,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI020,Derby Pie Slice,food,desserts,9.00,2.80,false,true,V007,2023-01-01 00:00:00,2024-06-01 10:00:00
+MI021,Elote Street Corn,food,snacks,8.50,2.00,false,true,V008,2023-06-01 00:00:00,2024-06-01 10:00:00
+MI022,Birria Tacos,food,tacos,14.00,4.20,false,true,V008,2023-06-01 00:00:00,2024-06-01 10:00:00
+MI023,Churros,food,desserts,7.00,1.50,false,true,V008,2023-06-01 00:00:00,2024-06-01 10:00:00
+MI024,Stadium Popcorn Large,food,snacks,8.00,1.00,false,true,V006,2023-03-01 00:00:00,2024-06-01 10:00:00
